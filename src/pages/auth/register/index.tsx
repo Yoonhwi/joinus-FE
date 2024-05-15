@@ -92,7 +92,7 @@ const Register = () => {
       birth: birth,
       phone: values?.phone,
       sex: sex,
-      profile: process.env.NEXT_PUBLIC_CLIENT_DOMAIN + profileURL,
+      profile: profileURL,
     };
 
     handleSignUp(data);

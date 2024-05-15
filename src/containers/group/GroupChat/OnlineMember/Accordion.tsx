@@ -12,11 +12,9 @@ interface AccordionProps {
 }
 
 const Accordion = ({ members }: AccordionProps) => {
-  const copiedMembers: Members[] = Array(40).fill(members[0]);
-
   return (
-    <Flex overflowY={"auto"} direction={"column"} gap={4} flex={1}>
-      {copiedMembers.map((member, i) => {
+    <Flex overflowY={"auto"} direction={"column"} gap={4}>
+      {members.map((member, i) => {
         return (
           <Flex alignItems={"center"} key={`group_member${i}`} gap={2} flex={1}>
             <Icon as={MdOnlinePrediction} fontSize={24} fill={"primary.500"} />
