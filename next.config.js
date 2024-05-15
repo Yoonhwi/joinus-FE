@@ -15,6 +15,12 @@ const nextConfig = {
       },
     ],
   },
+  rewrites: [
+    {
+      source: "api/:path*",
+      destination: "http://3.89.26.128/:path*",
+    },
+  ],
 };
 
 module.exports = nextConfig;
