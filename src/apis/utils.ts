@@ -3,7 +3,7 @@ import { ApiError } from "./types";
 
 const domain = process.env.NEXT_PUBLIC_SERVER_DOMAIN;
 
-export const getDomain = (url: string, protoc = "http") => {
+export const getDomain = (url: string, protoc = "https") => {
   return `${protoc}://${domain}${url ? `/${url}` : ""}`;
 };
 
