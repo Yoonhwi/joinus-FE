@@ -15,14 +15,6 @@ const nextConfig = {
       },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: "api/:path*",
-        destination: "http://3.89.26.128/:path*",
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;
