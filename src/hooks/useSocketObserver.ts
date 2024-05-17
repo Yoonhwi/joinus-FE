@@ -79,7 +79,10 @@ const useSocketObserver = ({ groupId, userId }: UseSocketObserverProps) => {
   useEffect(() => {
     if (!groupId || !userId) return;
 
-    const domain = getDomain("", "ws");
+    const domain = getDomain(
+      "",
+      process.env.NODE_ENV === "production" ? "wss" : "ws"
+    );
     const socket = new WebSocket(domain);
 
     socket.onopen = () => {
