@@ -7,7 +7,7 @@ import {
   toFormatBirth,
 } from "@/apis/auth";
 import { DefaultLayout, GenderSelection } from "@/components";
-import { PageRoutes } from "@/constants";
+import { ApiRoutes, PageRoutes } from "@/constants";
 
 import {
   Box,
@@ -75,8 +75,8 @@ const Register = () => {
   const { mutate: handleSignUp } = useMutation({
     mutationFn: (userData: UserData) => signUp(userData),
     onSuccess: (data, variables: UserData) => {
-      window.alert("회원가입에 성공하였습니다!");
       signIn(variables.email, variables.password!);
+      router.push(ApiRoutes.Home);
     },
   });
 
