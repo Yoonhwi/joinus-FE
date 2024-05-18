@@ -1,28 +1,22 @@
 import {
-  UserData,
   checkEmailExists,
   selectGender,
-  signIn,
-  signUp,
   toFormatBirth,
+  useSignUp,
+  useSignin,
 } from "@/apis/auth";
 import { DefaultLayout, GenderSelection } from "@/components";
 import { ApiRoutes, PageRoutes } from "@/constants";
 
 import {
-  Box,
   Button,
-  Center,
   Flex,
   FormControl,
   FormErrorMessage,
-  HStack,
   Heading,
   Input,
-  Text,
   useRadioGroup,
 } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { Controller, useForm } from "react-hook-form";
 
@@ -38,6 +32,8 @@ interface UserDataForm {
 
 const Register = () => {
   const router = useRouter();
+  const { mutate: signUp } = useSignUp();
+  const { mutate: signIn } = useSignin();
 
   const {
     handleSubmit,
@@ -64,21 +60,12 @@ const Register = () => {
 
   const genderOptions = ["남자", "여자"];
   const selectedGender = watch("sex");
-
   const { getRootProps } = useRadioGroup({
     name: "sex",
     defaultValue: "남자",
     onChange: (value: string) => setValue("sex", value),
   });
   const group = getRootProps();
-
-  const { mutate: handleSignUp } = useMutation({
-    mutationFn: (userData: UserData) => signUp(userData),
-    onSuccess: (data, variables: UserData) => {
-      signIn(variables.email, variables.password!);
-      router.push(ApiRoutes.Home);
-    },
-  });
 
   const onSubmit = async (values: UserDataForm) => {
     const sex = selectGender(values.sex);
@@ -95,7 +82,18 @@ const Register = () => {
       profile: profileURL,
     };
 
-    handleSignUp(data);
+    signUp(data, {
+      onSuccess: () => {
+        signIn(
+          { email: data.email, password: data.password },
+          {
+            onSuccess: () => {
+              router.push(ApiRoutes.Home);
+            },
+          }
+        );
+      },
+    });
   };
 
   // 아이디 중복 체크

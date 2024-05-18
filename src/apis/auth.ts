@@ -198,18 +198,6 @@ export const checkEmailExists = async (email: string) => {
   return response;
 };
 
-export const signUp = async (values: UserData) => {
-  const response = await fetch(getDomain(toUrl(ApiRoutes.SignUp)), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(values),
-  }).then((res) => res.json());
-
-  return response;
-};
-
 export const signUpSocial = async (values: UserData) => {
   const response = await fetch(getDomain(toUrl(ApiRoutes.SignUpSocial)), {
     method: "POST",
@@ -220,19 +208,6 @@ export const signUpSocial = async (values: UserData) => {
   }).then((res) => res.json());
 
   return response;
-};
-
-export const signIn = async (email: string, password: string) => {
-  const response = await fetch(getDomain(toUrl(ApiRoutes.SignIn)), {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
-  }).then((res) => res.json());
-
-  return response.data;
 };
 
 export const signInSocial = async (id?: number | string, type?: string) => {
@@ -295,4 +270,8 @@ export const toFormatBirth = (value: string) => {
 
 export const useGetMe = () => {
   return useFetch<User>(ApiRoutes.Me, undefined, { staleTime: 1000 * 60 * 10 });
+};
+
+export const useSignUp = () => {
+  return usePost(ApiRoutes.SignUp);
 };
