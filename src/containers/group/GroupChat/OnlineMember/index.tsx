@@ -56,7 +56,6 @@ export const OnlineMember = ({
     });
   }, [formatMembers, onlineMembers]);
 
-  const handleSubmit = () => {};
   return (
     <Box
       as={Collapse}
@@ -85,7 +84,7 @@ export const OnlineMember = ({
           </Flex>
           <InputWithButton
             placeholder="member"
-            hanldeSubmit={handleSubmit}
+            hanldeSubmit={() => {}}
             icon={IoIosSearch}
             boxStyle={{ position: "relative", alignItems: "center" }}
             buttonStyle={{ fontSize: 28, right: 0 }}

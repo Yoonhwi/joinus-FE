@@ -29,7 +29,9 @@ const GroupBodyForm = ({ register }: SetGroupDetailProps) => {
           id="group_name"
           placeholder="그룹명을 입력해주세요."
           maxLength={10}
-          {...register("name")}
+          {...register("name", {
+            required: "그룹명을 입력해주세요",
+          })}
         />
         <FormHelperText>그룹명의 최대길이는 10자리입니다.</FormHelperText>
       </FormControl>
@@ -38,7 +40,12 @@ const GroupBodyForm = ({ register }: SetGroupDetailProps) => {
         <FormLabel htmlFor="group_category" fontWeight={"normal"}>
           Group Category
         </FormLabel>
-        <Select h={12} {...register("category")}>
+        <Select
+          h={12}
+          {...register("category", {
+            required: "카테고리를 선택해주세요.",
+          })}
+        >
           <option value="" hidden>
             카테고리를 선택해주세요.
           </option>
@@ -59,7 +66,9 @@ const GroupBodyForm = ({ register }: SetGroupDetailProps) => {
         <Textarea
           placeholder="그룹소개를 해주세요."
           minH={150}
-          {...register("description")}
+          {...register("description", {
+            required: "그룹소개를 해주세요.",
+          })}
         />
       </FormControl>
     </>

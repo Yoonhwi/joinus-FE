@@ -61,9 +61,6 @@ const useSocketObserver = ({ groupId, userId }: UseSocketObserverProps) => {
   const handleSubmit = useCallback(
     (value: string) => {
       const ws = SockManager.getInstance().ws;
-
-      console.log(ws);
-
       if (!groupId || !userId) return;
       if (!ws) return;
       if (ws.readyState !== ws.OPEN) {
