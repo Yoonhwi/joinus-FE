@@ -128,8 +128,6 @@ const RegisterSocial = () => {
         alignItems={"center"}
         gap={4}
         py={12}
-        as={"form"}
-        onSubmit={handleSubmit(onSubmit)}
       >
         <Heading
           size={"xl"}
@@ -138,92 +136,99 @@ const RegisterSocial = () => {
         >
           Join Us
         </Heading>
-        <FormControl isInvalid={!!errors.email}>
-          <Input
-            type="text"
-            placeholder="이메일"
-            {...register("email", {
-              required: "아이디를 입력해주세요",
-              onBlur: (e) => checkDuplicateId(e.target.value),
-            })}
-          />
-          <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-        </FormControl>
+        <Flex
+          as={"form"}
+          onSubmit={handleSubmit(onSubmit)}
+          direction={"column"}
+          p={2}
+          gap={2}
+          w={{ base: "100%", sm: "480px" }}
+        >
+          <FormControl isInvalid={!!errors.email}>
+            <Input
+              type="text"
+              placeholder="이메일"
+              {...register("email", {
+                required: "아이디를 입력해주세요",
+                onBlur: (e) => checkDuplicateId(e.target.value),
+              })}
+            />
+            <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+          </FormControl>
 
-        <FormControl mt={4} isInvalid={!!errors.username}>
-          <Input
-            type="text"
-            placeholder="이름"
-            {...register("username", {
-              required: "이름을 입력해주세요",
-            })}
-          />
-          <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
-        </FormControl>
+          <FormControl isInvalid={!!errors.username}>
+            <Input
+              type="text"
+              placeholder="이름"
+              {...register("username", {
+                required: "이름을 입력해주세요",
+              })}
+            />
+            <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
+          </FormControl>
 
-        <FormControl mt={4} isInvalid={!!errors.birthday}>
-          <Input
-            type="text"
-            placeholder="생년월일 8자리 (YYYYMMDD)"
-            {...register("birthday", {
-              required: "생년월일 8자리를 입력해주세요",
-              minLength: {
-                value: 8,
-                message: "생년월일 8자리를 입력해 주세요",
-              },
-              maxLength: {
-                value: 8,
-                message: "생년월일 8자리를 입력해 주세요",
-              },
-            })}
-          />
-          <FormErrorMessage>{errors.birthday?.message}</FormErrorMessage>
-        </FormControl>
+          <FormControl isInvalid={!!errors.birthday}>
+            <Input
+              type="text"
+              placeholder="생년월일 8자리 (YYYYMMDD)"
+              {...register("birthday", {
+                required: "생년월일 8자리를 입력해주세요",
+                minLength: {
+                  value: 8,
+                  message: "생년월일 8자리를 입력해 주세요",
+                },
+                maxLength: {
+                  value: 8,
+                  message: "생년월일 8자리를 입력해 주세요",
+                },
+              })}
+            />
+            <FormErrorMessage>{errors.birthday?.message}</FormErrorMessage>
+          </FormControl>
 
-        <FormControl mt={4} isInvalid={!!errors.phone}>
-          <Input
-            type="text"
-            placeholder="전화번호"
-            {...register("phone", {
-              required: "전화번호를 입력해주세요",
-              minLength: {
-                value: 11,
-                message: "올바른 전화번호를 입력해주세요",
-              },
-              maxLength: {
-                value: 11,
-                message: "올바른 전화번호를 입력해주세요",
-              },
-            })}
-          />
-          <FormErrorMessage>{errors.phone?.message}</FormErrorMessage>
-        </FormControl>
+          <FormControl isInvalid={!!errors.phone}>
+            <Input
+              type="text"
+              placeholder="전화번호"
+              {...register("phone", {
+                required: "전화번호를 입력해주세요",
+                minLength: {
+                  value: 11,
+                  message: "올바른 전화번호를 입력해주세요",
+                },
+                maxLength: {
+                  value: 11,
+                  message: "올바른 전화번호를 입력해주세요",
+                },
+              })}
+            />
+            <FormErrorMessage>{errors.phone?.message}</FormErrorMessage>
+          </FormControl>
 
-        <FormControl isInvalid={!!errors.gender}>
-          <HStack {...group} justify="space-between" mt={4}>
-            {genderOptions.map((value) => {
-              return (
-                <Controller
-                  key={value}
-                  name="gender"
-                  control={control}
-                  rules={{ required: "성별을 선택해주세요" }}
-                  render={({ field }) => (
-                    <GenderSelection
-                      value={value}
-                      onChange={field.onChange}
-                      isSelected={selectedGender === value}
-                    ></GenderSelection>
-                  )}
-                />
-              );
-            })}
-          </HStack>
-        </FormControl>
-        <FormErrorMessage>{errors.gender?.message}</FormErrorMessage>
-        <Center>
+          <FormControl isInvalid={!!errors.gender}>
+            <HStack {...group} justify="space-between">
+              {genderOptions.map((value) => {
+                return (
+                  <Controller
+                    key={value}
+                    name="gender"
+                    control={control}
+                    rules={{ required: "성별을 선택해주세요" }}
+                    render={({ field }) => (
+                      <GenderSelection
+                        value={value}
+                        onChange={field.onChange}
+                        isSelected={selectedGender === value}
+                      ></GenderSelection>
+                    )}
+                  />
+                );
+              })}
+            </HStack>
+            <FormErrorMessage>{errors.gender?.message}</FormErrorMessage>
+          </FormControl>
           <Button type="submit">회원가입</Button>
-        </Center>
+        </Flex>
       </Flex>
     </DefaultLayout>
   );
