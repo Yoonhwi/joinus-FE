@@ -16,7 +16,7 @@ const HotUser = () => {
     <Flex gap={8} direction={"column"}>
       <Flex gap={2} alignItems={"center"}>
         <Icon as={FaHeart} color={"red"} w={"6"} h={"6"} />
-        <Heading size={"md"}>화재의 사람들 </Heading>
+        <Heading size={"md"}>화제의 사람들 </Heading>
       </Flex>
 
       {concatData.map((user, index) => {
