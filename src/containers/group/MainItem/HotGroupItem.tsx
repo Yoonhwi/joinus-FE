@@ -28,6 +28,7 @@ const HotGroupItem = ({ data }: HotGroupItemProps) => {
       >
         <Swiper<imgs> datas={data.images} renderItem={HotGroupImage} />
       </Flex>
+
       <GroupCard data={data} />
     </Flex>
   );

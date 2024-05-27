@@ -1,16 +1,22 @@
 import { useGetUser } from "@/apis";
 import { UserCard } from "@/containers";
-import { useBgColor } from "@/hooks";
-import { Box, Flex, Heading, Icon, useColorMode } from "@chakra-ui/react";
+import { User } from "@/types";
+import {
+  Box,
+  Flex,
+  Heading,
+  Icon,
+  Skeleton,
+  useColorMode,
+} from "@chakra-ui/react";
 import { FaHeart } from "react-icons/fa";
 
 const HotUser = () => {
   const { data: user1 } = useGetUser(53);
   const { data: user2 } = useGetUser(10);
   const { colorMode } = useColorMode();
-  const concatData = [];
-  if (user1) concatData.push(user1);
-  if (user2) concatData.push(user2);
+
+  const concatData = [user1, user2].filter(Boolean) as User[];
 
   return (
     <Flex gap={8} direction={"column"}>
@@ -19,18 +25,20 @@ const HotUser = () => {
         <Heading size={"md"}>화제의 사람들 </Heading>
       </Flex>
 
-      {concatData.map((user, index) => {
-        return (
-          <Box
-            key={`usercard_${index}`}
-            p={2}
-            bgColor={colorMode === "light" ? "gray.100" : "gray.700"}
-            borderRadius={16}
-          >
-            <UserCard data={user} />
-          </Box>
-        );
-      })}
+      <Skeleton isLoaded={!!concatData.length} minH={540}>
+        {concatData.map((user, index) => {
+          return (
+            <Box
+              key={`usercard_${index}`}
+              p={2}
+              bgColor={colorMode === "light" ? "gray.100" : "gray.700"}
+              borderRadius={16}
+            >
+              <UserCard data={user} />
+            </Box>
+          );
+        })}
+      </Skeleton>
     </Flex>
   );
 };

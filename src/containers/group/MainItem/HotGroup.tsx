@@ -1,19 +1,18 @@
-import { Flex, Heading, Icon, IconButton } from "@chakra-ui/react";
+import { Flex, Heading, Icon, IconButton, Skeleton } from "@chakra-ui/react";
 import { FaHeart } from "react-icons/fa";
 import { HotGroupItem } from "@/containers";
 import { useGetGroup } from "@/apis";
 import { useRouter } from "next/router";
 import { PageRoutes } from "@/constants";
 import { TiStarFullOutline } from "react-icons/ti";
+import { Group } from "@/types";
 
 const HotGroup = () => {
   const router = useRouter();
   const { data: group1 } = useGetGroup(31);
   const { data: group2 } = useGetGroup(1);
 
-  const concatData = [];
-  if (group1) concatData.push(group1);
-  if (group2) concatData.push(group2);
+  const concatData = [group1, group2].filter(Boolean) as Group[];
 
   return (
     <Flex gap={8} direction={"column"}>
@@ -22,6 +21,7 @@ const HotGroup = () => {
           <Icon as={FaHeart} color={"red"} w={"6"} h={"6"} />
           <Heading size={"md"}>인기 모임에 가입해보세요 </Heading>
         </Flex>
+
         <IconButton
           aria-label="createclub_bt"
           variant={"ghost"}
@@ -35,9 +35,12 @@ const HotGroup = () => {
           </Flex>
         </IconButton>
       </Flex>
-      {concatData.map((group, index) => {
-        return <HotGroupItem key={index} data={group} />;
-      })}
+
+      <Skeleton isLoaded={!!concatData.length} minH={630}>
+        {concatData.map((group, index) => {
+          return <HotGroupItem key={index} data={group} />;
+        })}
+      </Skeleton>
     </Flex>
   );
 };
