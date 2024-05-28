@@ -26,18 +26,20 @@ const HotUser = () => {
       </Flex>
 
       <Skeleton isLoaded={!!concatData.length} minH={540}>
-        {concatData.map((user, index) => {
-          return (
-            <Box
-              key={`usercard_${index}`}
-              p={2}
-              bgColor={colorMode === "light" ? "gray.100" : "gray.700"}
-              borderRadius={16}
-            >
-              <UserCard data={user} />
-            </Box>
-          );
-        })}
+        <Flex gap={6} direction={"column"}>
+          {concatData.map((user, index) => {
+            return (
+              <Box
+                key={`usercard_${index}`}
+                p={2}
+                bgColor={colorMode === "light" ? "gray.100" : "gray.700"}
+                borderRadius={16}
+              >
+                <UserCard data={user} />
+              </Box>
+            );
+          })}
+        </Flex>
       </Skeleton>
     </Flex>
   );

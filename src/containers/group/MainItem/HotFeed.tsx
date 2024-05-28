@@ -17,9 +17,11 @@ const HotFeed = () => {
       </Flex>
 
       <Skeleton isLoaded={!!concatData.length} minH={340}>
-        {concatData.map((feed, index) => {
-          return <NewFeedItem key={index} data={feed} />;
-        })}
+        <Flex gap={6} direction={"column"}>
+          {concatData.map((feed, index) => {
+            return <NewFeedItem key={index} data={feed} />;
+          })}
+        </Flex>
       </Skeleton>
     </Flex>
   );

@@ -37,9 +37,11 @@ const HotGroup = () => {
       </Flex>
 
       <Skeleton isLoaded={!!concatData.length} minH={630}>
-        {concatData.map((group, index) => {
-          return <HotGroupItem key={index} data={group} />;
-        })}
+        <Flex gap={6} direction={"column"}>
+          {concatData.map((group, index) => {
+            return <HotGroupItem key={index} data={group} />;
+          })}
+        </Flex>
       </Skeleton>
     </Flex>
   );

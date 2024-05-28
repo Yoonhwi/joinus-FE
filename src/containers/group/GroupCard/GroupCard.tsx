@@ -27,7 +27,7 @@ const GroupCard = ({ data }: GroupProps) => {
   return (
     <Card
       onClick={() => router.push(toUrl(PageRoutes.GroupHome, { id: data.id }))}
-      _hover={{ transform: "scale(1.02)", cursor: "pointer" }}
+      _hover={{ cursor: "pointer" }}
       flex={1}
       borderRadius={0}
     >
