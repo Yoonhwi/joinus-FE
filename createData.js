@@ -13,51 +13,51 @@ const categories = [
 ];
 
 const api = [
-  // {
-  //   url: "auth/signup",
-  //   method: "POST",
-  //   params: {
-  //     password: "12341234!@",
-  //     name: "승휘",
-  //     profile:
-  //       "https://kr.object.ncloudstorage.com/joinus/image/1711678253222.jpg",
-  //     birth: "1996-01-05",
-  //     sex: true,
-  //     phone: "01041351531",
-  //     email: "ush0105@aaa.com",
-  //   },
-  // },
-  // {
-  //   url: "auth/signin",
-  //   method: "POST",
-  //   params: {
-  //     email: "ush0105@aaa.com",
-  //     password: "12341234!@",
-  //   },
-  // },
-  // {
-  //   url: "categories",
-  //   method: "POST",
-  // },
-  // {
-  //   url: "clubs",
-  //   method: "POST",
-  //   params: {
-  //     capacity: 20,
-  //     categories: [9],
-  //     description: "함께 운동하실 분들을 모집합니다.",
-  //     maximum_age: 100,
-  //     minimum_age: 0,
-  //     name: `Venus Health`,
-  //     sex: true,
-  //     images: [
-  //       {
-  //         url: "https://kr.object.ncloudstorage.com/joinus/image/1713330560054.jpg",
-  //         type: "main",
-  //       },
-  //     ],
-  //   },
-  // },
+  {
+    url: "auth/signup",
+    method: "POST",
+    params: {
+      password: "12341234!@",
+      name: "승휘",
+      profile:
+        "https://kr.object.ncloudstorage.com/joinus/image/1711678253222.jpg",
+      birth: "1996-01-05",
+      sex: true,
+      phone: "01041351531",
+      email: "ush0105@aaa.com",
+    },
+  },
+  {
+    url: "auth/signin",
+    method: "POST",
+    params: {
+      email: "ush0105@aaa.com",
+      password: "12341234!@",
+    },
+  },
+  {
+    url: "categories",
+    method: "POST",
+  },
+  {
+    url: "clubs",
+    method: "POST",
+    params: {
+      capacity: 20,
+      categories: [9],
+      description: "함께 운동하실 분들을 모집합니다.",
+      maximum_age: 100,
+      minimum_age: 0,
+      name: `Venus Health`,
+      sex: true,
+      images: [
+        {
+          url: "https://kr.object.ncloudstorage.com/joinus/image/1713330560054.jpg",
+          type: "main",
+        },
+      ],
+    },
+  },
   {
     url: "clubs",
     method: "POST",
@@ -189,7 +189,6 @@ const postCategory = async (header) => {
 };
 
 export const createData = async () => {
-  console.log("api", api);
   const header = {
     "Content-Type": "application/json",
     Authorization: "",
@@ -197,7 +196,7 @@ export const createData = async () => {
 
   api.reduce(
     async (prev, curr) => {
-      return prev.then(async () => {
+      const cb = async () => {
         if (curr.url === "categories") {
           await postCategory(header);
         } else if (curr.url === "auth/signin") {
@@ -211,8 +210,10 @@ export const createData = async () => {
             headers: header,
             body: JSON.stringify(curr.params),
           });
-      });
+      };
+      return prev.then(cb).catch(cb);
     },
+
     new Promise((resolve) => resolve())
   );
 };
