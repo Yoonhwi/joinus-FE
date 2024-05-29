@@ -174,6 +174,120 @@ const api = [
       ],
     },
   },
+  {
+    url: "clubs",
+    method: "POST",
+    params: {
+      capacity: 20,
+      categories: [1],
+      description: "영화에 대한 열정을 가진 사람들을 위한 모임입니다.",
+      maximum_age: 100,
+      minimum_age: 0,
+      name: "Movie Buffs United",
+      sex: true,
+      images: [
+        {
+          url: "https://kr.object.ncloudstorage.com/joinus/image/1716990056396.jpg",
+          type: "main",
+        },
+      ],
+    },
+  },
+  {
+    url: "clubs",
+    method: "POST",
+    params: {
+      capacity: 20,
+      categories: [2],
+      description: "스포츠 팬들을 위한 모임으로 다양한 활동을 즐겨봅시다.",
+      maximum_age: 100,
+      minimum_age: 0,
+      name: "Sports Enthusiasts Group",
+      sex: true,
+      images: [
+        {
+          url: "https://kr.object.ncloudstorage.com/joinus/image/1716990031823.jpg",
+          type: "main",
+        },
+      ],
+    },
+  },
+  {
+    url: "clubs",
+    method: "POST",
+    params: {
+      capacity: 20,
+      categories: [4],
+      description: "게임을 사랑하는 사람들을 위한 최고의 모임입니다.",
+      maximum_age: 100,
+      minimum_age: 0,
+      name: "Ultimate Gamers",
+      sex: true,
+      images: [
+        {
+          url: "https://kr.object.ncloudstorage.com/joinus/image/1716989995310.jpg",
+          type: "main",
+        },
+      ],
+    },
+  },
+  {
+    url: "clubs",
+    method: "POST",
+    params: {
+      capacity: 20,
+      categories: [6],
+      description: "요리를 좋아하는 사람들과 함께하는 요리 클래스입니다.",
+      maximum_age: 100,
+      minimum_age: 0,
+      name: "Gourmet Cooking Club",
+      sex: true,
+      images: [
+        {
+          url: "https://kr.object.ncloudstorage.com/joinus/image/1716990074277.jpg",
+          type: "main",
+        },
+      ],
+    },
+  },
+  {
+    url: "clubs",
+    method: "POST",
+    params: {
+      capacity: 20,
+      categories: [3],
+      description: "음악을 함께 즐기고 연주하는 사람들의 모임입니다.",
+      maximum_age: 100,
+      minimum_age: 0,
+      name: "Melody Makers",
+      sex: true,
+      images: [
+        {
+          url: "https://kr.object.ncloudstorage.com/joinus/image/1716990094885.jpg",
+          type: "main",
+        },
+      ],
+    },
+  },
+  {
+    url: "clubs",
+    method: "POST",
+    params: {
+      capacity: 20,
+      categories: [5],
+      description: "책을 좋아하는 사람들이 모여서 함께 읽고 토론합니다.",
+      maximum_age: 100,
+      minimum_age: 0,
+      name: "Literary Circle",
+      sex: true,
+      images: [
+        {
+          url: "https://kr.object.ncloudstorage.com/joinus/image/1716990113059.jpg",
+          type: "main",
+        },
+      ],
+    },
+  },
 ];
 
 const postCategory = async (header) => {
