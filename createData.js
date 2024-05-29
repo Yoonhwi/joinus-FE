@@ -194,26 +194,24 @@ export const createData = async () => {
     Authorization: "",
   };
 
-  api.reduce(
-    async (prev, curr) => {
-      const cb = async () => {
-        if (curr.url === "categories") {
-          await postCategory(header);
-        } else if (curr.url === "auth/signin") {
-          return response.json().then((data) => {
-            const token = data.data.token;
-            header.Authorization = token;
-          });
-        } else
-          return fetch(baseUrl + curr.url, {
-            method: curr.method,
-            headers: header,
-            body: JSON.stringify(curr.params),
-          });
-      };
-      return prev.then(cb).catch(cb);
-    },
-
-    new Promise((resolve) => resolve())
-  );
+  for (const curr of api) {
+    if (curr.url === "categories") {
+      await postCategory(header);
+    } else if (curr.url === "auth/signin") {
+      const response = await fetch(baseUrl + curr.url, {
+        method: curr.method,
+        headers: header,
+        body: JSON.stringify(curr.params),
+      });
+      const data = await response.json();
+      const token = data.data.token;
+      header.Authorization = `Bearer ${token}`;
+    } else {
+      await fetch(baseUrl + curr.url, {
+        method: curr.method,
+        headers: header,
+        body: JSON.stringify(curr.params),
+      });
+    }
+  }
 };
