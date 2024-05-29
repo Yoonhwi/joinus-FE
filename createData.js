@@ -205,7 +205,7 @@ export const createData = async () => {
       });
       const data = await response.json();
       const token = data.data.token;
-      header.Authorization = `Bearer ${token}`;
+      header.Authorization = token;
     } else {
       await fetch(baseUrl + curr.url, {
         method: curr.method,
