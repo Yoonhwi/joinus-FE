@@ -28,6 +28,7 @@ const CircleImg = ({
         boxShadow={"xl"}
         border={"1px solid #CBD5E0"}
         style={style}
+        as="image"
       >
         <Image
           src={imgSrc}
