@@ -1,4 +1,4 @@
-const baseUrl = "https://api.joinus.asia/";
+const baseUrl = `https://${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/`;
 
 const categories = [
   "영화",
@@ -10,6 +10,14 @@ const categories = [
   "IT",
   "기타",
   "운동",
+];
+
+const idList = [
+  { email: "ush0105@aaa.com", password: "12341234!@" },
+  { email: "ush0106@aaa.com", password: "12341234!@" },
+  { email: "ush0107@aaa.com", password: "12341234!@" },
+  { email: "ush0108@aaa.com", password: "12341234!@" },
+  { email: "ush0109@aaa.com", password: "12341234!@" },
 ];
 
 const api = [
@@ -28,6 +36,62 @@ const api = [
     },
   },
   {
+    url: "auth/signup",
+    method: "POST",
+    params: {
+      password: "12341234!@",
+      name: "승휘이",
+      profile:
+        "https://kr.object.ncloudstorage.com/joinus/image/1711678253222.jpg",
+      birth: "1996-01-05",
+      sex: true,
+      phone: "01041351531",
+      email: "ush0106@aaa.com",
+    },
+  },
+  {
+    url: "auth/signup",
+    method: "POST",
+    params: {
+      password: "12341234!@",
+      name: "승휘삼",
+      profile:
+        "https://kr.object.ncloudstorage.com/joinus/image/1711678253222.jpg",
+      birth: "1996-01-05",
+      sex: true,
+      phone: "01041351531",
+      email: "ush0107@aaa.com",
+    },
+  },
+  {
+    url: "auth/signup",
+    method: "POST",
+    params: {
+      password: "12341234!@",
+      name: "승휘사",
+      profile:
+        "https://kr.object.ncloudstorage.com/joinus/image/1711678253222.jpg",
+      birth: "1996-01-05",
+      sex: true,
+      phone: "01041351531",
+      email: "ush0108@aaa.com",
+    },
+  },
+  {
+    url: "auth/signup",
+    method: "POST",
+    params: {
+      password: "12341234!@",
+      name: "승휘오",
+      profile:
+        "https://kr.object.ncloudstorage.com/joinus/image/1711678253222.jpg",
+      birth: "1996-01-05",
+      sex: true,
+      phone: "01041351531",
+      email: "ush0109@aaa.com",
+    },
+  },
+  {
     url: "auth/signin",
     method: "POST",
     params: {
@@ -35,10 +99,10 @@ const api = [
       password: "12341234!@",
     },
   },
-  {
-    url: "categories",
-    method: "POST",
-  },
+  // {
+  //   url: "categories",
+  //   method: "POST",
+  // },
   {
     url: "clubs",
     method: "POST",
@@ -288,7 +352,37 @@ const api = [
       ],
     },
   },
+  {
+    url: "clubs?limit=500",
+    method: "GET",
+  },
 ];
+
+const postComment = async (feedId) => {
+  const header = {
+    "Content-Type": "application/json",
+    Authorization: "",
+  };
+  const postComments = idList.map(async (v) => {
+    const response = await fetch(baseUrl + "auth/signin", {
+      method: "POST",
+      headers: header,
+      body: JSON.stringify(v),
+    });
+
+    const data = await response.json();
+    const token = data.data.token;
+    header.Authorization = token;
+
+    await fetch(baseUrl + `feeds/${feedId}/comments`, {
+      method: "POST",
+      headers: header,
+      body: JSON.stringify({ content: "안녕하세요!" }),
+    });
+  });
+
+  await Promise.all(postComments);
+};
 
 const postCategory = async (header) => {
   const promises = categories.map(async (curr) => {
@@ -297,9 +391,25 @@ const postCategory = async (header) => {
       headers: header,
       body: JSON.stringify({ name: curr }),
     });
-    console.log("api Request:", "POST", baseUrl + "categories", curr);
   });
   await Promise.all(promises);
+};
+
+const postFeed = async (header, id) => {
+  await fetch(baseUrl + `clubs/${id}/feeds`, {
+    method: "POST",
+    headers: header,
+    body: JSON.stringify({
+      title: "안녕하세요!",
+      content: "안녕하세요. 오랜만에 인사드려요!",
+      is_private: false,
+    }),
+  })
+    .then((res) => res.json())
+    .then(async (data) => {
+      const feedId = data.data;
+      await postComment(feedId);
+    });
 };
 
 export const createData = async () => {
@@ -309,23 +419,44 @@ export const createData = async () => {
   };
 
   for (const curr of api) {
-    if (curr.url === "categories") {
-      await postCategory(header);
-    } else if (curr.url === "auth/signin") {
-      const response = await fetch(baseUrl + curr.url, {
-        method: curr.method,
-        headers: header,
-        body: JSON.stringify(curr.params),
-      });
-      const data = await response.json();
-      const token = data.data.token;
-      header.Authorization = token;
-    } else {
-      await fetch(baseUrl + curr.url, {
-        method: curr.method,
-        headers: header,
-        body: JSON.stringify(curr.params),
-      });
+    switch (curr.url) {
+      case "categories":
+        await postCategory(header);
+        break;
+      case "auth/signin":
+        {
+          const response = await fetch(baseUrl + curr.url, {
+            method: curr.method,
+            headers: header,
+            body: JSON.stringify(curr.params),
+          });
+          const data = await response.json();
+          const token = data.data.token;
+          header.Authorization = token;
+        }
+        break;
+      case "clubs?limit=500":
+        {
+          const response = await fetch(baseUrl + curr.url, {
+            method: curr.method,
+            headers: header,
+          });
+          const data = await response.json().then((res) => res.data.data);
+          if (data) {
+            const postFeeds = data.map((v) => {
+              return postFeed(header, v.id);
+            });
+            await Promise.all(postFeeds);
+          }
+        }
+        break;
+      default:
+        await fetch(baseUrl + curr.url, {
+          method: curr.method,
+          headers: header,
+          body: JSON.stringify(curr.params),
+        }).catch((err) => console.log(err));
+        break;
     }
   }
 };
