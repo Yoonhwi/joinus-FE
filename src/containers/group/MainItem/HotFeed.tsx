@@ -5,8 +5,8 @@ import { Flex, Heading, Icon, Skeleton } from "@chakra-ui/react";
 import { FaHeart } from "react-icons/fa";
 
 const HotFeed = () => {
-  const { data: feed1 } = useGetFeed(3);
-  const { data: feed2 } = useGetFeed(4);
+  const { data: feed1 } = useGetFeed(28);
+  const { data: feed2 } = useGetFeed(30);
   const concatData = [feed1, feed2].filter(Boolean) as Feed[];
 
   return (

@@ -1,5 +1,5 @@
 import { useFetch, useUpateGroup } from "@/apis";
-import { ApiRoutes } from "@/constants";
+import { ApiRoutes, PageRoutes } from "@/constants";
 import {
   AgeBox,
   CategoryBox,
@@ -98,7 +98,15 @@ const Setting = () => {
               </Table>
             </TableContainer>
             <Flex gap={2} justifyContent={"end"} mr={"24px"}>
-              <Button>돌아가기</Button>
+              <Button
+                onClick={() =>
+                  router.push(
+                    toUrl(PageRoutes.GroupHome, { id: numberingQuery })
+                  )
+                }
+              >
+                돌아가기
+              </Button>
               <Button type="submit">수정완료</Button>
             </Flex>
           </Flex>

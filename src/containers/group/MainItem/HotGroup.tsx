@@ -10,7 +10,7 @@ import { Group } from "@/types";
 const HotGroup = () => {
   const router = useRouter();
   const { data: group1 } = useGetGroup(31);
-  const { data: group2 } = useGetGroup(1);
+  const { data: group2 } = useGetGroup(184);
 
   const concatData = [group1, group2].filter(Boolean) as Group[];
 
