@@ -115,8 +115,9 @@ const RegisterSocial = () => {
     const response = await signUpSocial(data);
 
     if (response.status === 200) {
-      window.alert("회원가입에 성공하였습니다!");
-      signInSocial(data.social_id, data.type);
+      signInSocial(data.social_id, data.type).then(() => {
+        router.push(PageRoutes.Home);
+      });
     }
   };
 
