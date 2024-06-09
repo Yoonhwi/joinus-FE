@@ -21,6 +21,7 @@ import {
   Flex,
   Heading,
 } from "@chakra-ui/react";
+import { profile } from "console";
 import { useRouter } from "next/router";
 import { Controller, useForm } from "react-hook-form";
 
@@ -89,6 +90,7 @@ const RegisterSocial = () => {
   };
 
   const onSubmit = async (values: UserData) => {
+    const profileURL = "/noneUserImg.webp";
     const gender = selectGender(values.gender);
     const birthday = toFormatBirth(values.birthday);
 
@@ -110,6 +112,7 @@ const RegisterSocial = () => {
       birth: birthday,
       phone: values?.phone,
       sex: gender,
+      profile: profileURL,
     };
 
     const response = await signUpSocial(data);

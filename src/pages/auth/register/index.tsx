@@ -7,6 +7,7 @@ import {
 } from "@/apis/auth";
 import { DefaultLayout, GenderSelection } from "@/components";
 import { ApiRoutes, PageRoutes } from "@/constants";
+import { toUrl } from "@/utils";
 
 import {
   Button,
@@ -88,7 +89,7 @@ const Register = () => {
           { email: data.email, password: data.password },
           {
             onSuccess: () => {
-              router.push(ApiRoutes.Home);
+              router.push(toUrl(PageRoutes.Home));
             },
           }
         );
