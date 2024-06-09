@@ -23,6 +23,7 @@ const baseImg =
   process.env.NEXT_PUBLIC_BASIC_PROFILE_IMAGE ?? "/noneUserImg.webp";
 
 const UpdateUserForm = ({ user }: UpdateUserFormProps) => {
+  const profileUrl = user.profile ?? baseImg;
   const queryClient = useQueryClient();
   const { data: me } = useGetMe();
   const { mutate: uploadImg } = usePostImg();
@@ -94,7 +95,7 @@ const UpdateUserForm = ({ user }: UpdateUserFormProps) => {
         flex={1}
         justify={"center"}
       >
-        <CircleImg imgSrc={user.profile} alt="user_profile" size={60} />
+        <CircleImg imgSrc={profileUrl} alt="user_profile" size={60} />
         {me?.id === user.id && (
           <Flex gap={2}>
             <Input
