@@ -1,40 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 🌟 Join-us  
+> **공통의 관심사로 연결된 사람들의 소통 플랫폼**
+　　
+---
+### 📌 프로젝트 개요  
+**Join-us**는 사용자들이 공통의 관심사와 목적을 중심으로 클럽을 생성하고 참여하며, 소통 및 다양한 활동을 할 수 있는 플랫폼입니다.
+　　
+### 🎯 프로젝트 목표  
+- **Git을 활용한 협업**  
+  백엔드 개발자와 함께 API 명세를 작성하고 이슈를 관리하며 소통하는 과정을 통해 협업 경험을 쌓습니다.  
+- **실시간 채팅 서비스 구현**  
+  WebSocket을 활용하여 사용자 간 빠르고 끊김 없는 실시간 소통을 제공합니다.  
+- **모바일 중심 UX 강화**  
+  인피니티 스크롤을 적용하여 데이터 로드 경험을 최적화하고 사용자 경험을 향상시킵니다.
+　　
+　　　　
+### 👥 팀 구성  
+- **프론트엔드:** 2명  
+- **백엔드:** 1명  
+> 총 3인의 협업 프로젝트로 진행되었습니다.
+　　
+---
+### 🔑 주요 기능  
+#### 1️⃣ 클럽 관리  
+-  클럽 생성 및 관리 기능 제공  
+-  관심사 기반으로 다양한 클럽에 참여 가능  
+　　
+#### 2️⃣ 실시간 채팅  
+-  WebSocket을 활용한 실시간 채팅 서비스 제공  
+-  유저 간 빠르고 끊김 없는 소통 가능  
+　　
+#### 3️⃣ 인피니티 스크롤  
+-  무한 스크롤과 데이터 가상화 기술을 활용해 대량의 데이터를 효율적으로 처리  
+-  사용자 경험 향상 및 성능 최적화  
+　　　　　　　　
+---
+### 🛠️ 기술 스택
+-  **React**  
+-  **TypeScript**  
+-  **Next.js**  
+-  **React-Query**  
+-  **Chakra UI**
+　　
+　　　　
+---
+### 🙌 느낀 점  
+- **협업 경험**  
+  백엔드 개발자와 API 명세를 작성하고 이슈를 해결하며 소통하고, 프론트엔드 팀원과 코드 컨벤션과 UI를 맞추는 과정을 통해 협업과 팀워크의 중요성을 느꼈습니다.  
+- **성능 최적화**  
+  WebSocket을 통한 빠르고 끊김 없는 실시간 소통, 무한 스크롤, 데이터 가상화를 활용해 대량 데이터를 효율적으로 처리하며 성능 문제를 해결했습니다.  
+- **사용자 중심 서비스**  
+  이러한 경험들을 통해 사용자 중심의 서비스를 제공하겠다는 제 개발 철학이 더욱 확고해졌습니다.
+　
+--- 
+### 추가 자료
+제 포트폴리오에서 Join-us 관련 영상과 설명을 좀 더 자세하게 보실 수 있습니다.
+🔗[포트폴리오 바로가기](https://yoonhwi.github.io/new-portfolio)
